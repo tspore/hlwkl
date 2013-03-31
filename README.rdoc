@@ -1,0 +1,3 @@
+== How Long Will Kelly Last
+
+Rails project for tracking date based guesses
