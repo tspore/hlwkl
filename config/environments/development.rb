@@ -1,4 +1,10 @@
 Hlwkl::Application.configure do
+
+  # Configure your Are You A Human Publisher and Scoring Keys
+  # Sign up at http://www.areyouahuman.com/
+  config.PUBLISHER_KEY = ''
+  config.SCORING_KEY = ''
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
