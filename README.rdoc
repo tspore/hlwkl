@@ -2,4 +2,4 @@
 
 Rails project for tracking date based guesses
 
-rails generate bootstrap:install static
+rails generate simple_form:install --bootstrap

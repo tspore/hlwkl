@@ -1,36 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hlwkl</title>
+  <title><%= t(:site) %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <style>
-      body {
-          padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-  </style>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-static-top">
   <div class="navbar-inner">
-    <div class="container">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to t(:site), root_path, :class => 'brand' %>
-
-      <div class="nav-collapse collapse">
-        <ul class="nav">
+    <%= link_to t(:site), root_path, :class => 'brand' %>
+    <ul class="nav">
+      <% if current_page?(root_path) %>
           <li class="active"><%= link_to 'Home', root_path %></li>
-          <li><%=  link_to t(:new_guess), new_comment_path %></li>
-        </ul>
-      </div>
-      <!--/.nav-collapse -->
-    </div>
+      <% else %>
+          <li><%= link_to 'Home', root_path %></li>
+      <% end %>
+      <% if current_page?(new_comment_path) %>
+          <li class="active"><%= link_to t(:new_guess), new_comment_path %></li>
+      <% else %>
+          <li><%= link_to t(:new_guess), new_comment_path %></li>
+      <% end %>
+    </ul>
   </div>
 </div>
 
