@@ -25,6 +25,8 @@ class CommentsController < ApplicationController
   # GET /comments/new.json
   def new
     @comment = Comment.new
+    ayah = AYAH::Integration.new(Rails.configuration.PUBLISHER_KEY, Rails.configuration.SCORING_KEY)
+    @publisher_html = ayah.get_publisher_html.html_safe
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +42,15 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+
+    session_secret = params['session_secret'] # in this case, using Rails
+    ayah = AYAH::Integration.new(Rails.configuration.PUBLISHER_KEY, Rails.configuration.SCORING_KEY)
+    unless ayah.score_result(session_secret, request.remote_ip)
+      respond_to do |format|
+        format.html { render action: "new" }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
     @comment = Comment.new(params[:comment])
 
     respond_to do |format|
