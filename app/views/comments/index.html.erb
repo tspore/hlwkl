@@ -1,29 +1,23 @@
-<h1>Listing comments</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Guess</th>
-    <th>Comment</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @comments.each do |comment| %>
-  <tr>
-    <td><%= comment.name %></td>
-    <td><%= comment.email %></td>
-    <td><%= comment.guess %></td>
-    <td><%= comment.comment %></td>
-    <td><%= link_to 'Show', comment %></td>
-    <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-    <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+    <% @col_counter = @col_counter + 1 %>
+    <% if @col_counter > 3 %>
+        <div class="row">
+          <% @col_counter = 0 %>
+    <% end %>
+    <%= content_tag :div, :class => "span1" do -%>
+        <% hash = Digest::MD5.hexdigest(comment.email.downcase) %>
+        <%= image_tag("http://www.gravatar.com/avatar/#{hash}", :class => "img-polaroid") %>
+    <% end %>
+    <%= content_tag :div, :class => "span3" do -%>
+
+        <%= content_tag :h2, comment.name %><%= content_tag :h4, comment.guess %>
+        <%= content_tag :p, comment.comment %>
+    <% end %>
+    <% if @col_counter >= 3 %>
+        </div>
+    <% end %>
 <% end %>
-</table>
 
-<br />
+<br/>
 
-<%= link_to 'New Comment', new_comment_path %>
+<%= link_to t(:new_guess), new_comment_path, :class => 'btn btn-large' %>

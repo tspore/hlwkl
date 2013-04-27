@@ -1,3 +1,5 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :comment, :email, :guess, :name
+  validates :name, presence: true
+  validates :email, uniqueness: true, presence: true
+  validates :guess, uniqueness: true, presence: true
 end

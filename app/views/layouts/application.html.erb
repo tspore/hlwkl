@@ -21,12 +21,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="#">HLWKL</a>
+      <%= link_to t(:site), root_path, :class => 'brand' %>
 
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="active"><%= link_to 'Home', root_path %></li>
-          <li><%=  link_to 'New Comment', new_comment_path %></li>
+          <li><%=  link_to t(:new_guess), new_comment_path %></li>
         </ul>
       </div>
       <!--/.nav-collapse -->
