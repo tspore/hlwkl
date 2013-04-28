@@ -32,7 +32,6 @@ class CommentsController < ApplicationController
     @comment = Comment.new
     ayah = AYAH::Integration.new(Rails.configuration.PUBLISHER_KEY, Rails.configuration.SCORING_KEY)
     #@publisher_html = ayah.get_publisher_html.html_safe
-    @publisher_html = ""
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @comment }
